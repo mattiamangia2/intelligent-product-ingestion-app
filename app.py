@@ -1,6 +1,7 @@
 import os
 import uuid
 import fitz  # PyMuPDF
+import pandas as pd
 from flask import Flask, request, jsonify, render_template
 from google.cloud import storage, bigquery
 from queries import run_structuring_query, run_enrichment_query, get_final_product
