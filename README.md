@@ -111,7 +111,7 @@ python app.py
 ```
 2. Open your browser to `http://12_7.0.0.1:5000` to use the application.
 
-##6. Future Improvements
+## 6. Future Improvements
 + **Event-Driven Architecture:** The pipeline could be fully automated by using a Cloud Function that triggers on new file uploads to the GCS bucket.
 
 + **Advanced Error Handling:** Implement a dead-letter queue for PDFs that fail processing for manual review.
