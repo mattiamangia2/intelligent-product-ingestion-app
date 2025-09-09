@@ -2,7 +2,7 @@ import functions_framework
 import requests
 import json
 import re
-import os # Import the 'os' library
+import os
 
 @functions_framework.http
 def find_ean(request):
@@ -10,13 +10,13 @@ def find_ean(request):
     This is a secure Cloud Function that searches for a product's EAN code.
     It reads sensitive API keys from environment variables, not from the code itself.
     """
-    # --- SECURE METHOD: Read secrets from environment variables ---
+# --- SECURE METHOD: Read secrets from environment variables ---
     API_KEY = os.environ.get("SEARCH_API_KEY")
     SEARCH_ENGINE_ID = os.environ.get("SEARCH_ENGINE_ID")
 
     if not API_KEY or not SEARCH_ENGINE_ID:
         print("ERROR: Environment variables for search keys are not set.")
-        # Return a generic error to avoid exposing internal details
+# Return a generic error to avoid exposing internal details
         return json.dumps({'replies': ["Server configuration error"] * len(request.get_json()['calls'])})
 
     request_json = request.get_json(silent=True)

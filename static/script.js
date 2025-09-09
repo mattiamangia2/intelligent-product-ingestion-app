@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM Element Selectors ---
+// --- DOM Element Selectors ---
     const uploadSection = document.getElementById('upload-section');
     const loadingIndicator = document.getElementById('loading-indicator');
     const resultsArea = document.getElementById('results-preview-area');
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedFile = null;
     let currentResultData = null;
 
-    // --- Theme Switcher Logic ---
+// --- Theme Switcher Logic ---
     const applyTheme = (theme) => {
         if (theme === 'dark') {
             document.body.classList.add('dark-mode');
@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTheme(theme);
     });
     
-    // Apply saved theme on page load
+// Apply saved theme on page load
     const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
 
 
-    // --- Event Listeners ---
+// --- Event Listeners ---
     fileInput.addEventListener('change', handleFileSelect);
     uploadBtn.addEventListener('click', startPipeline);
     startOverBtn.addEventListener('click', resetUI);
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- UI State Management ---
+// --- UI State Management ---
     function resetUI() {
         uploadSection.classList.remove('hidden');
         loadingIndicator.classList.add('hidden');
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         errorDetails.textContent = message;
         errorArea.classList.remove('hidden');
         
-        // Add a start over button in the error area
+// Add a start over button in the error area
         const tryAgainBtn = document.createElement('button');
         tryAgainBtn.textContent = 'Try Again';
         tryAgainBtn.className = 'button-primary';
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Main Pipeline Logic ---
+// --- Main Pipeline Logic ---
     async function startPipeline() {
         if (!selectedFile) return;
 
@@ -130,7 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderResults(data) {
         const tableBody = document.getElementById('preview-table-body');
-        tableBody.innerHTML = ''; // Clear previous results
+        tableBody.innerHTML = ''; 
+// Clear previous results
 
         const attributes = {
             "Product Title": data.product_title,

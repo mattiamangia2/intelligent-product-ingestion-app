@@ -1,11 +1,10 @@
 from flask import Flask, request, jsonify, render_template
 from werkzeug.utils import secure_filename
-import fitz  # PyMuPDF
+import fitz
 import pandas as pd
 from google.cloud import storage, bigquery
 import os
 import uuid
-# THE FIX IS HERE: We removed the non-existent 'get_final_product'
 from queries import run_structuring_query, run_enrichment_query
 
 # --- CONFIGURATION ---
@@ -46,7 +45,7 @@ def process_pdf():
         try:
             upload_id = str(uuid.uuid4())
             
-            # --- 1. PDF PROCESSING ---
+# --- 1. PDF PROCESSING ---
             pdf_content = file.read()
             doc = fitz.open(stream=pdf_content, filetype="pdf")
             
@@ -63,7 +62,7 @@ def process_pdf():
                     image_blob.upload_from_string(image_bytes, content_type='image/png')
                     image_urls.append(image_blob.public_url)
 
-            # --- 2. LOAD TO BIGQUERY STAGING ---
+# --- 2. LOAD TO BIGQUERY STAGING ---
             data_for_bq = { 'product_id': upload_id, 'raw_text': raw_text }
             if image_urls:
                  data_for_bq['image_url_1'] = image_urls[0]
@@ -73,7 +72,7 @@ def process_pdf():
             job_config = bigquery.LoadJobConfig(write_disposition="WRITE_APPEND")
             bq_client.load_table_from_dataframe(df, table_ref, job_config=job_config).result()
 
-            # --- 3. RUN BIGQUERY AI PIPELINE ---
+# --- 3. RUN BIGQUERY AI PIPELINE ---
             run_structuring_query(bq_client, upload_id)
             final_data = run_enrichment_query(bq_client, upload_id)
             

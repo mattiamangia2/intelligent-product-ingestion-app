@@ -1,6 +1,6 @@
 # queries.py
 
-# This query uses AI to structure the raw text from a single product.
+# This query uses AI to structure the raw text from a single product. The product can be either uploaded in the bucket in GCP or, as this small app does, be uploaded in
 # It finds the relevant row in the staging table using the unique product_id.
 def run_structuring_query(client, product_id):
     sql = f"""
@@ -18,10 +18,12 @@ def run_structuring_query(client, product_id):
         )
     );
     """
-    client.query(sql).result() # Wait for the job to complete
+    client.query(sql).result() 
+# Wait for the job to complete
 
 
-# This query joins the structured data with image URLs and EAN codes.
+# This query joins the structured data with image URLs and EAN codes. The Idea is to try obtaining EAN or UPC codes from a websearch
+# if the result doesn't bring back any result, it will be not specified
 # It now specifically handles the case where no results are found.
 def run_enrichment_query(client, product_id):
     sql = f"""
@@ -44,17 +46,17 @@ def run_enrichment_query(client, product_id):
     query_job = client.query(sql)
     results = query_job.result()
 
-    # --- THIS IS THE FIX ---
-    # Check if the query returned any rows at all.
+# Check if the query returned any rows at all.
     if results.total_rows == 0:
-        # If not, it means the AI failed to structure the data. Return None.
+# If not, it means the AI failed to structure the data. Return None.
         return None
 
-    # If we have rows, process the first one (there should only be one).
+# If we have rows, process the first one (there should only be one).
     final_data = None
     for row in results:
         final_data = dict(row.items())
-        break # We only care about the first result
+        break 
+# We only care about the first result
     
     return final_data
 
