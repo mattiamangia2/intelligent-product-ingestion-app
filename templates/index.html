@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Product Ingestion</title>
+    <!-- Link to the new CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <!-- Theme Switcher -->
+            <div class="theme-switch-wrapper">
+                <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.591a.75.75 0 011.06 0zm-11.45 11.45a.75.75 0 010-1.06l1.59-1.591a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM12 19.5a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 19.5zM4.106 18.894a.75.75 0 011.06 0l1.591 1.59a.75.75 0 11-1.06 1.06l-1.59-1.591a.75.75 0 010-1.06zM21.75 12a.75.75 0 01-1.5 0H18a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM4.106 5.106a.75.75 0 010 1.06l-1.59 1.591a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM19.95 19.95a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM2.25 12a.75.75 0 01.75-.75H6a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75z"/></svg>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-slider">
+                    <span class="slider round"></span>
+                </label>
+                <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.01 2.01c-.13 0-.26.01-.4.03C6.4 2.51 2 7.3 2 12.55 2 17.1 5.9 21 10.45 21c.21 0 .42-.01.63-.03-.21-.49-.37-1-.49-1.53-.13-.53-.2-1.09-.2-1.68 0-2.95 2.4-5.34 5.34-5.34.59 0 1.15.07 1.68.2.53.12 1.04.28 1.53.49.02-.21.03-.42.03-.63C19.99 7.3 15.5 2.01 12.01 2.01z"/></svg>
+            </div>
+            <h1>Intelligent Product Ingestion</h1>
+            <p class="subtitle">Automate e-commerce catalogs from PDF spec sheets using BigQuery AI.</p>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <section id="upload-section">
+                <div class="file-upload-group">
+                    <input type="file" id="file-input" accept=".pdf">
+                    <label for="file-input" class="file-label">
+                        <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 16.5V9.75m0 0l-3 3m3-3l3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"></path></svg>
+                        <span>Choose a file...</span>
+                    </label>
+                    <p id="file-name-display"></p>
+                </div>
+                <button id="upload-btn" class="button-primary" disabled>Process Product Sheet</button>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loading-indicator" class="hidden">
+                <div class="spinner">
+                    <div class="dot1"></div>
+                    <div class="dot2"></div>
+                </div>
+                <p>Analyzing PDF and structuring data with BigQuery AI...</p>
+            </section>
+            
+            <!-- Error Section -->
+            <section id="error-message-area" class="hidden">
+                <h3>Processing Failed</h3>
+                <p id="error-details"></p>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-preview-area" class="hidden">
+                <h2>Extraction Complete</h2>
+                 <button id="download-btn-excel" class="button-primary" style="margin-bottom: 20px;">Download as Excel (CSV)</button>
+                 
+                <div id="preview-table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="preview-table-body">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+                <button id="start-over-btn" style="margin-top: 20px; background-color: var(--text-muted-color);" class="button-primary">Process Another File</button>
+            </section>
+        </main>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
