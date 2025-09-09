@@ -1,0 +1,5 @@
+Flask>=2.0
+google-cloud-bigquery>=3.0
+google-cloud-storage>=2.0
+PyMuPDF>=1.23
+pandas>=1.3
