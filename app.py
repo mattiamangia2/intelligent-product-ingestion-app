@@ -8,7 +8,7 @@ from queries import run_structuring_query, run_enrichment_query, get_final_produ
 # --- Configuration (Update these values) ---
 PROJECT_ID = "kaggle-bigqueryai"
 PDF_BUCKET_NAME = "kaggle-pdf-product-sheets"
-IMAGE_BUCKET_NAME = "kaggle-extracted-images-us"
+IMAGE_BUCKET_NAME = "kaggle-extracted-images"
 DATASET_ID = "product_data"
 STAGING_TABLE_ID = "staging_product_data"
 
