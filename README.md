@@ -18,6 +18,8 @@ This project solves the problem by providing a complete, end-to-end web applicat
 + **Multimodal Extraction:** Automatically extracts both raw text and all images from the PDF.
 
 + **AI-Powered Image Classification:** Uses the Gemini Vision model to analyze each extracted image, intelligently distinguishing between actual product photos and irrelevant charts or logos.
+> [!NOTE]
+> Previous feature coming next
 
 + **AI-Powered Data Structuring:** Leverages BigQuery's `AI.GENERATE_TABLE` function to transform the unstructured wall of text into a clean, structured table with well-defined columns (e.g., `product_title`, `color`, `dimensions`).
 
@@ -30,11 +32,13 @@ The application follows a modern, serverless architecture that is both powerful 
 
 **Workflow:**
 
-1.**Upload:** The user uploads a PDF via the Flask web application.
+1. **Upload:** The user uploads a PDF via the Flask web application.
 
 2. **Multimodal Pre-processing:** The Flask backend extracts all text and images. The Gemini Vision API is called to filter for relevant product images only.
 
 3. **Staging:** The raw text and the URLs of the filtered images are loaded into a staging table in BigQuery.
+> [!NOTE]
+> Previous 2 features coming next
 
 4. **AI Structuring:** A BigQuery query executes `AI.GENERATE_TABLE`, using a Gemini model to read the raw text and generate a structured table of product attributes.
 
@@ -50,6 +54,8 @@ This project was built from the ground up to showcase the power of AI capabiliti
 + `REMOTE FUNCTION` (AI Architect 🧠): We extend BigQuery's capabilities beyond its boundaries. By creating a remote function that calls our secure Cloud Run service, we enrich our internal data with external, real-time information from the web (EAN/UPC codes), creating a more valuable final dataset.
 
 + Gemini Vision API (Multimodal Pioneer 🖼️): Our solution doesn't just treat images as files to be extracted. By calling the Gemini Vision model, we perform intelligent, AI-driven classification to distinguish valuable product photos from noise. This is a true multimodal approach, where we analyze the content of the unstructured image data to make decisions.
+> [!NOTE]
+> Previous feature coming next
 
 ## 5. How to Run This Project
 Prerequisites:
@@ -117,5 +123,8 @@ python app.py
 + **Advanced Error Handling:** Implement a dead-letter queue for PDFs that fail processing for manual review.
 
 + **Vector Search for Similar Products:** The extracted product descriptions could be converted into embeddings (`ML.GENERATE_EMBEDDING`) to enable vector search for finding semantically similar products.
++ **Addition of Image attributes:** The extracted images will go in the product sheet as image attributes via open and sharable url, allowing backend of major e-commerce vebsites being able to upload those informations and display pictures. Those features are highlighted in the previous text with:
+> [!NOTE]
+> Previous feature coming next
 
 This project was developed by Mattia Mangia.
